@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Безпека та приватність — Zapchastyna</title>
+<meta name="description" content="Де зберігаються ваші логіни, що йде на сервер ліцензій і чому Zapchastyna не може замовити товар від вашого імені — по фактах, без маркетингу.">
+<meta property="og:title" content="Безпека та приватність — Zapchastyna">
+<meta property="og:image" content="og-image.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- NAV:START -->
+<nav class="site-nav">
+  <div class="container">
+    <a href="index.html" class="nav-logo"><img src="images/logo/logo.png" alt="Zapchastyna.org"></a>
+    <button class="nav-toggle" aria-label="Меню">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Головна</a></li>
+      <li><a href="possibilities.html">Можливості</a></li>
+      <li><a href="security.html" class="active">Безпека</a></li>
+      <li><a href="instructions.html">Інструкція</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+    </ul>
+    <div class="nav-right">
+      <a class="contact-icon tg" href="https://t.me/+380509423675" target="_blank" rel="noopener" title="Написати в Telegram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+      </a>
+      <a class="contact-icon viber" href="viber://chat?number=%2B380509423675" title="Написати у Viber">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.21z"/></svg>
+      </a>
+    </div>
+  </div>
+</nav>
+<!-- NAV:END -->
+
+<!-- SLOGAN STRIP -->
+<div class="slogan-strip">
+  <div class="container">
+    <span>Потужно</span><span class="dot">•</span><span>Швидко</span><span class="dot">•</span><span>Надійно</span><span class="dot">•</span><span>Розроблено для спеціалістів СТО</span>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Безпека</span>
+    <h1>Безпека та приватність — по фактах, без маркетингу</h1>
+    <p>Ця сторінка існує тому, що питання «а звідки я знаю, що ви не вкрадете мої логіни» — справедливе питання. Ось повна відповідь, без розмитих фраз на кшталт «ми дбаємо про вашу безпеку».</p>
+  </div>
+</section>
+
+<section class="section-pad on-bg">
+  <div class="container article">
+
+    <h2><span class="idx">01 · Логіни</span>Де зберігаються ваші логіни</h2>
+    <p>Логіни та паролі до постачальників, які ви вводите в налаштуваннях, зберігаються в одному текстовому файлі <span class="code-chip">config.json</span> на вашому комп'ютері — в тій самій папці, куди встановилась програма. Цей файл ніколи нікуди не завантажується. Хочете переконатись самі — відкрийте його блокнотом.</p>
+    <figure style="margin:1.8em 0 0">
+      <div class="shot-frame"><img src="images/screenshots/settings-sources-demo.png" alt="Панель налаштувань: перемикачі джерел, поле логіна і приховане поле пароля"></div>
+      <figcaption style="font-size:13px;color:var(--ink-soft);margin-top:10px">Панель налаштувань. Логін — звичайне текстове поле, пароль — приховане (значення на скріні демонстраційні).</figcaption>
+    </figure>
+
+    <h2><span class="idx">02 · Мережа</span>Що взагалі йде через інтернет</h2>
+    <p>Коли ви шукаєте запчастину, запит іде напряму з вашого комп'ютера на сайт того постачальника, чий логін використовується — так само, якби ви самі відкрили цей сайт у браузері. Через наші сервери ці дані не проходять.</p>
+    <p>Єдиний виняток — коротка перевірка діючої ліцензії. Раз на кілька годин програма надсилає на сервер ліцензій знеособлений відбиток вашого комп'ютера, номер ліцензійного ключа та версію програми:</p>
+    <div class="code-block">{
+  <span class="k">"token"</span>: <span class="s">"••••••••••"</span>,          <span class="c">// спільний секрет програми, не ваш</span>
+  <span class="k">"client"</span>: <span class="s">"Ваш магазин"</span>,       <span class="c">// мітка з вашого ключа</span>
+  <span class="k">"machine_id"</span>: <span class="s">"fcf0e60f5538"</span>, <span class="c">// хеш, не серійний номер заліза</span>
+  <span class="k">"version"</span>: <span class="s">"2026.07.19"</span>
+}</div>
+    <p>Все. Жодних логінів постачальників у цьому запиті немає і бути не може — технічно він просто не має до них доступу. Якщо інтернету немає — програма ще 5 днів працює офлайн за останньою перевіркою.</p>
+
+    <h2><span class="idx">03 · Замовлення</span>А раптом ви замовите товар від мого імені?</h2>
+    <div class="callout">
+      <strong>Ні.</strong> Програма лише читає ціни та залишки під вашим логіном — рівно те саме, що показує звичайний пошук на сайті постачальника. Вона нічого не додає в кошик, нічого не замовляє і не змінює пароль. Замовлення ви, як і раніше, оформлюєте самі — на сайті постачальника або як зазвичай це робите.
+    </div>
+
+    <h2><span class="idx">04 · Перевірка</span>Хочете перевірити самі</h2>
+    <p>Це не хмарний сервіс — це звичайна програма на вашому комп'ютері. Всі файли — конфігурація, логіни, кеш ліцензії — лежать поруч, у папці встановлення, звичайними текстовими файлами. Нічого прихованого.</p>
+
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <h2>Готові спробувати?</h2>
+    <p>14 днів безкоштовно. Логіни залишаються тільки у вас.</p>
+    <a class="btn btn-primary" href="downloads/vstanovlennia.zip" download="Встановлення.zip">Скачати</a>
+  </div>
+</section>
+
+<!-- FOOTER:START -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="images/logo/logo.png" alt="Zapchastyna.org">
+        <p>Пошук запчастин одразу у 33 постачальників — в одному вікні, без зайвих вкладок.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Сторінки</h4>
+        <ul>
+          <li><a href="possibilities.html">Можливості</a></li>
+          <li><a href="security.html">Безпека та приватність</a></li>
+          <li><a href="instructions.html">Інструкція зі встановлення</a></li>
+          <li><a href="faq.html">Питання і відповіді</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Завантажити</h4>
+        <ul>
+          <li><a href="downloads/vstanovlennia.zip" download="Встановлення.zip">Скачати Zapchastyna</a></li>
+          <li><a href="https://t.me/+380509423675" target="_blank" rel="noopener">Написати в Telegram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Zapchastyna</span>
+      <span>Пошук запчастин в одному вікні</span>
+    </div>
+  </div>
+</footer>
+<!-- FOOTER:END -->
+
+<script src="js/main.js"></script>
+</body>
+</html>

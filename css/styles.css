@@ -479,9 +479,12 @@ section { position: relative; }
 /* =========================================================
    Suppliers ticker
    ========================================================= */
-.ticker-wrap {
+.ticker-rows {
   margin-top: 46px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
@@ -489,12 +492,15 @@ section { position: relative; }
   display: flex;
   gap: 14px;
   width: max-content;
-  animation: ticker 42s linear infinite;
+  animation: ticker 34s linear infinite;
 }
-.ticker-wrap:hover .ticker-track { animation-play-state: paused; }
+/* Кожен ряд — свій список (з рядка 1) продубльований x3, тому їде на -33.333%,
+   а не -50% як у старій односмуговій стрічці */
+.ticker-row:nth-child(even) .ticker-track { animation-direction: reverse; }
+.ticker-row:hover .ticker-track { animation-play-state: paused; }
 @keyframes ticker {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to { transform: translateX(-33.333%); }
 }
 .badge {
   display: flex;
@@ -531,6 +537,39 @@ section { position: relative; }
   border-radius: 6px;
 }
 .suppliers-note { margin-top: 26px; font-size: 14px; color: var(--gray); }
+
+/* Одна стрічка постачальників на головній — лежить ще на фото hero,
+   одразу під .trust-line.
+   .hero-photo .container сам по собі вузький (flex shrink-to-fit під
+   560px hero-copy, притиснутий до лівого краю) — width:100% тут не
+   рятує (проценти все одно проростають через max-content дочірніх
+   flex-контейнерів і роздувають .container на всю ширину стрічки,
+   ~15000px). Тому width — в vw: абсолютна одиниця, що не залежить
+   від (ще не порахованої) ширини предка, і рветься на весь viewport
+   від лівого краю .container (який завжди збігається з лівим краєм
+   екрана в цій розкладці) — на мобілці так само, як і на десктопі.
+   На мобілці стрічка лишається у звичайному потоці (margin-top —
+   просто відступ). На десктопі .hero-copy центрується вертикально
+   хаком margin-top:-114px — якщо рахувати стрічку як звичайний вміст
+   контейнера, вона додає висоти й зсуває центрований блок вище (наліз
+   на .slogan-strip). Тому на десктопі стрічка absolute (не впливає на
+   висоту для центрування) і прибивається під фактичний низ .hero-copy
+   через top:calc(100% + 28px). */
+.hero-ticker-inline {
+  width: 100vw;
+  margin-left: calc(-1 * var(--pad));
+  margin-top: 20px;
+}
+.hero-ticker-inline .ticker-rows { margin-top: 0; }
+@media (min-width: 761px) {
+  .hero-ticker-inline {
+    margin-top: 0;
+    margin-left: 0;
+    position: absolute;
+    left: 0;
+    top: calc(100% + 28px);
+  }
+}
 
 /* =========================================================
    Instructions
@@ -638,6 +677,118 @@ section { position: relative; }
     linear-gradient(#000, #000) padding-box,
     conic-gradient(from var(--liquid-metal-angle), var(--liquid-metal-stops)) border-box;
 }
+
+/* =========================================================
+   Video demo teaser + modal
+   ========================================================= */
+.video-demo-inner {
+  display: grid;
+  grid-template-columns: 0.86fr 1.14fr;
+  gap: 56px;
+  align-items: center;
+}
+.video-demo-copy .accent { color: var(--red); }
+.video-demo-copy p { color: var(--ink-soft); font-size: 16px; max-width: 42ch; }
+
+.video-thumb {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  background: var(--ink);
+  aspect-ratio: 16 / 9;
+}
+.video-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: saturate(.82) brightness(.8);
+  transition: filter .3s ease, transform .5s ease;
+}
+.video-thumb:hover img { filter: saturate(1) brightness(.9); transform: scale(1.03); }
+.video-thumb-veil {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(32,28,25,0) 55%, rgba(32,28,25,.55) 100%);
+  pointer-events: none;
+}
+.video-play-ring {
+  position: absolute; top: 50%; left: 50%;
+  width: 72px; height: 72px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(20, 17, 15, .55);
+  border: 2px solid rgba(255,255,255,.9);
+  box-shadow: 0 10px 26px -8px rgba(0,0,0,.5);
+  transition: transform .2s ease, background .2s ease;
+}
+.video-thumb:hover .video-play-ring { transform: translate(-50%, -50%) scale(1.08); background: rgba(179,38,28,.85); border-color: #fff; }
+.video-play-icon { width: 26px; height: 26px; fill: #fff; margin-left: 3px; }
+.video-duration {
+  position: absolute; right: 14px; bottom: 14px;
+  font-family: var(--font-mono);
+  font-size: 12.5px; letter-spacing: .5px;
+  color: #fff9f6;
+  background: rgba(32,28,25,.72);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+@media (max-width: 860px) {
+  .video-demo-inner { grid-template-columns: 1fr; gap: 30px; }
+}
+
+.video-modal {
+  position: fixed; inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center; justify-content: center;
+  padding: 24px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .25s ease, visibility .25s ease;
+}
+.video-modal.is-open { visibility: visible; opacity: 1; }
+.video-modal-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(20, 17, 15, .82);
+  backdrop-filter: blur(6px);
+}
+.video-modal-box {
+  position: relative;
+  width: min(960px, 100%);
+  transform: scale(.94);
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+}
+.video-modal.is-open .video-modal-box { transform: scale(1); }
+.video-modal-ratio {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lift);
+  background: #000;
+}
+.video-modal-ratio iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border: none;
+}
+.video-modal-close {
+  position: absolute;
+  top: 20px; right: 24px;
+  z-index: 1;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,.12);
+  color: #fff9f6;
+  font-size: 17px;
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease;
+}
+.video-modal-close:hover { background: rgba(255,255,255,.22); transform: rotate(90deg); }
 
 /* =========================================================
    Footer

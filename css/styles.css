@@ -95,6 +95,8 @@ section { position: relative; }
   background: currentColor;
   display: inline-block;
 }
+.eyebrow-no-dash::before { display: none; }
+.brand-red { color: var(--red-dark); }
 
 /* =========================================================
    Buttons
@@ -201,12 +203,24 @@ section { position: relative; }
 }
 
 @media (max-width: 860px) {
+  /* Суцільний фон замість напівпрозорого зі blur: на головній під шапкою
+     проїжджає фото героя і стрічка постачальників, вони просвічували крізь
+     неї — при скролі це читалось як «панель ховається». На інших сторінках
+     під шапкою рівний світлий фон, тому там ефекту не було видно. */
+  .site-nav { background: #fff; backdrop-filter: none; -webkit-backdrop-filter: none; }
   .nav-links { position: fixed; top: 55px; left: 0; right: 0; background: #fff; flex-direction: column; align-items: flex-start; gap: 0; border-bottom: 1px solid var(--gray-line); max-height: 0; overflow: hidden; transition: max-height .25s ease; }
   .nav-links.open { max-height: 320px; }
   .nav-links li { width: 100%; }
   .nav-links a { display: block; padding: 16px var(--pad); width: 100%; border-bottom: 1px solid var(--gray-line); opacity: 1; border-radius: 0; transform: none !important; }
   .nav-links a::before, .nav-links a::after { display: none; }
   .nav-toggle { display: block; }
+}
+@media (max-width: 420px) {
+  .site-nav .container { padding-inline: 14px; }
+  .nav-logo img { height: 34px; }
+  .contact-icon { width: 30px; height: 30px; }
+  .nav-right { gap: 8px; }
+  .nav-toggle { font-size: 22px; }
 }
 
 /* =========================================================
@@ -224,6 +238,7 @@ section { position: relative; }
   gap: 10px;
   font-family: var(--font-mono);
   font-size: 12px;
+  font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--blue-grad-1);
@@ -262,8 +277,8 @@ section { position: relative; }
   content: "";
   position: absolute; inset: 0;
   background: linear-gradient(100deg,
-    rgba(255,255,255,0.8) 0%,
-    rgba(255,255,255,0.72) 40%,
+    rgba(255,255,255,0.65) 0%,
+    rgba(255,255,255,0.6) 40%,
     rgba(255,255,255,0.55) 54%,
     rgba(255,255,255,0.25) 68%,
     rgba(255,255,255,0) 82%);
@@ -307,7 +322,13 @@ section { position: relative; }
     rgba(255,255,255,0) 88%);
 }
 .hero-ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-bottom: 10px; }
-.hero-subcta { font-size: 14px; color: var(--gray); }
+.hero-subcta { font-size: 14px; color: var(--blue-grad-1); }
+.hero-subcta a { text-decoration: underline; font-weight: 700; }
+.hero-subcta a:hover { text-decoration: none; }
+.link-tg, .link-viber { text-decoration: underline; font-weight: 700; }
+.link-tg:hover, .link-viber:hover { text-decoration: none; }
+.link-tg { color: #229ED9; }
+.link-viber { color: #7360F2; }
 .trust-line {
   margin-top: 22px;
   display: flex;
@@ -327,7 +348,10 @@ section { position: relative; }
 @media (max-width: 760px) {
   .hero-photo { min-height: auto; padding-bottom: 60px; background-position: center 66%; }
   .hero-photo::before { background: linear-gradient(180deg, rgba(255,255,255,0.82) 0%, rgba(255,255,255,0.82) 46%, rgba(255,255,255,0.68) 68%, rgba(255,255,255,0.68) 100%); }
-  .hero-photo .container { padding-top: 40px; }
+  /* width:100% замість shrink-to-fit — інакше стрічка постачальників
+     (100vw + відʼємний margin) роздувала контейнер ширше за екран,
+     і сторінка виїжджала по горизонталі (шапка з'їжджала вправо) */
+  .hero-photo .container { padding-top: 40px; width: 100%; min-width: 0; }
 }
 
 /* mini stats/feature strip under hero */
@@ -445,6 +469,18 @@ section { position: relative; }
 .article h2 { font-size: clamp(24px, 3vw, 30px); margin-top: 2.2em; text-transform: none; }
 .article h2 .idx { color: var(--red); font-family: var(--font-mono); font-size: 0.55em; letter-spacing: 1px; display: block; text-transform: uppercase; margin-bottom: 6px; }
 .article p, .article li { font-size: 16px; line-height: 1.7; color: #3a352f; }
+.article .shot-frame { margin: 20px 0; }
+.video-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--gray-line);
+  box-shadow: var(--shadow-lift);
+  margin: 24px 0;
+}
+.video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .callout {
   background: var(--bg-2);
   border-left: 4px solid var(--red);
@@ -537,6 +573,7 @@ section { position: relative; }
   border-radius: 6px;
 }
 .suppliers-note { margin-top: 26px; font-size: 14px; color: var(--gray); }
+.badge-grid { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0; }
 
 /* Одна стрічка постачальників на головній — лежить ще на фото hero,
    одразу під .trust-line.
@@ -556,15 +593,20 @@ section { position: relative; }
    висоту для центрування) і прибивається під фактичний низ .hero-copy
    через top:calc(100% + 28px). */
 .hero-ticker-inline {
-  width: 100vw;
-  margin-left: calc(-1 * var(--pad));
+  /* full-bleed через відʼємні поля, а не width:100vw — 100vw включає
+     ширину скролбара і давав горизонтальне переповнення */
+  width: auto;
+  margin-inline: calc(-1 * var(--pad));
   margin-top: 20px;
 }
 .hero-ticker-inline .ticker-rows { margin-top: 0; }
 @media (min-width: 761px) {
   .hero-ticker-inline {
+    /* absolute + shrink-to-fit розтягнувся б по контенту стрічки (~15000px),
+       тому тут ширина задається явно */
+    width: 100vw;
     margin-top: 0;
-    margin-left: 0;
+    margin-inline: 0;
     position: absolute;
     left: 0;
     top: calc(100% + 28px);
@@ -666,6 +708,7 @@ section { position: relative; }
 }
 .cta-band h2 { font-size: clamp(30px, 4.5vw, 46px); color: #fff9f6; }
 .cta-band p { color: rgba(255,249,246,0.85); font-size: 16px; margin-bottom: 26px; }
+.cta-band .cta-note { margin-top: 20px; margin-bottom: 0; font-size: 14.5px; }
 .cta-band .btn-primary {
   background:
     linear-gradient(#201c19, #201c19) padding-box,
@@ -714,17 +757,16 @@ section { position: relative; }
 }
 .video-play-ring {
   position: absolute; top: 50%; left: 50%;
-  width: 72px; height: 72px;
+  width: 90px; height: 64px;
   transform: translate(-50%, -50%);
-  border-radius: 50%;
+  border-radius: 16px;
   display: flex; align-items: center; justify-content: center;
-  background: rgba(20, 17, 15, .55);
-  border: 2px solid rgba(255,255,255,.9);
-  box-shadow: 0 10px 26px -8px rgba(0,0,0,.5);
+  background: #FF0000;
+  box-shadow: 0 10px 26px -8px rgba(0,0,0,.6);
   transition: transform .2s ease, background .2s ease;
 }
-.video-thumb:hover .video-play-ring { transform: translate(-50%, -50%) scale(1.08); background: rgba(179,38,28,.85); border-color: #fff; }
-.video-play-icon { width: 26px; height: 26px; fill: #fff; margin-left: 3px; }
+.video-thumb:hover .video-play-ring { transform: translate(-50%, -50%) scale(1.08); background: #d90000; }
+.video-play-icon { width: 34px; height: 34px; fill: #fff; margin-left: 4px; }
 .video-duration {
   position: absolute; right: 14px; bottom: 14px;
   font-family: var(--font-mono);
@@ -801,7 +843,7 @@ section { position: relative; }
 }
 .footer-top {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;
   gap: 40px;
   padding-bottom: 36px;
   border-bottom: 1px solid var(--gray-line);
@@ -856,4 +898,6 @@ section { position: relative; }
    Scroll reveal
    ========================================================= */
 [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
-[data-reveal].is-visible { opacity: 1; transform: translateY(0); }
+[data-reveal="left"] { transform: translateX(-56px); }
+[data-reveal="right"] { transform: translateX(56px); }
+[data-reveal].is-visible { opacity: 1; transform: translate(0, 0); }

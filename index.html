@@ -22,14 +22,6 @@
 <nav class="site-nav">
   <div class="container">
     <a href="index.html" class="nav-logo"><img src="images/logo/logo.png" alt="Zapchastyna.org"></a>
-    <button class="nav-toggle" aria-label="Меню">☰</button>
-    <ul class="nav-links">
-      <li><a href="index.html" class="active">Головна</a></li>
-      <li><a href="possibilities.html">Можливості</a></li>
-      <li><a href="security.html">Безпека</a></li>
-      <li><a href="instructions.html">Інструкція</a></li>
-      <li><a href="faq.html">FAQ</a></li>
-    </ul>
     <div class="nav-right">
       <a class="contact-icon tg" href="https://t.me/+380509423675" target="_blank" rel="noopener" title="Написати в Telegram">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
@@ -38,6 +30,14 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.21z"/></svg>
       </a>
     </div>
+    <button class="nav-toggle" aria-label="Меню">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Головна</a></li>
+      <li><a href="possibilities.html">Можливості</a></li>
+      <li><a href="security.html">Безпека</a></li>
+      <li><a href="instructions.html">Інструкція</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+    </ul>
   </div>
 </nav>
 <!-- NAV:END -->
@@ -53,15 +53,15 @@
   <div class="container">
     <div class="hero-copy">
       <h1>Пошук запчастин одним кліком у <span class="accent">33 постачальників</span></h1>
-      <p class="lede">Zapchastyna — програма для вашого комп'ютера, яка шукає ціни та наявність одразу у всіх ваших постачальників автозапчастин. Один запит замість тридцяти вкладок у браузері.</p>
+      <p class="lede"><span class="brand-red">Zapchastyna</span> — програма для вашого комп'ютера, яка шукає ціни та наявність одразу у всіх ваших постачальників автозапчастин. Один запит замість тридцяти вкладок у браузері.</p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="downloads/vstanovlennia.zip" download="Встановлення.zip">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
           Скачати безкоштовно
         </a>
-        <a class="btn btn-ghost" href="possibilities.html">Як це працює</a>
+        <a class="btn btn-ghost" href="#video-demo">Як це працює</a>
       </div>
-      <div class="hero-subcta">14 днів безкоштовно, далі — від 500 грн/міс</div>
+      <div class="hero-subcta">14 днів безкоштовно, далі — від 500 грн/міс. Напишіть нам в <a class="link-tg" href="https://t.me/+380509423675" target="_blank" rel="noopener">Telegram</a> чи <a class="link-viber" href="viber://chat?number=%2B380509423675">Viber</a> і ми надамо Вам ключ на тестовий період</div>
       <div class="trust-line">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
         <span>Логіни та паролі до ваших постачальників зберігаються лише на вашому комп'ютері — ми їх не бачимо і не зберігаємо.</span>
@@ -104,13 +104,12 @@
 </section>
 
 <!-- VIDEO DEMO -->
-<section class="section-pad on-bg-2 video-demo">
+<section class="section-pad on-bg-2 video-demo" id="video-demo">
   <div class="container">
     <div class="video-demo-inner">
       <div class="video-demo-copy" data-reveal>
-        <span class="eyebrow">Демо-відео</span>
-        <h2 style="font-size:clamp(28px,4vw,42px)">3 хвилини — і ви побачите<br>весь <span class="accent">пошук наживо</span></h2>
-        <p>Від артикулу деталі до кошика постачальника — без монтажу, як є.</p>
+        <span class="eyebrow eyebrow-no-dash">Демо-відео</span>
+        <h2 style="font-size:clamp(28px,4vw,42px)">Подивіться як <span class="brand-red">Zapchastyna</span> збереже Ваш час при щоденному пошуку запчастин.</h2>
       </div>
       <button type="button" class="video-thumb shot-frame" id="videoPlayBtn" aria-haspopup="dialog" aria-controls="videoModal" data-reveal>
         <img src="https://img.youtube.com/vi/5nn7vj4TVbQ/maxresdefault.jpg"
@@ -156,7 +155,14 @@
         <h4>Завантажити</h4>
         <ul>
           <li><a href="downloads/vstanovlennia.zip" download="Встановлення.zip">Скачати Zapchastyna</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Контакти</h4>
+        <ul>
           <li><a href="https://t.me/+380509423675" target="_blank" rel="noopener">Написати в Telegram</a></li>
+          <li><a href="viber://chat?number=%2B380509423675">Написати в Viber</a></li>
+          <li><a href="tel:+380509423675">+380 50 942 36 75</a></li>
         </ul>
       </div>
     </div>

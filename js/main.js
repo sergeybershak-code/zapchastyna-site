@@ -12,6 +12,12 @@
         toggle.textContent = '☰';
       });
     });
+    document.addEventListener('click', function (e) {
+      if (!links.classList.contains('open')) return;
+      if (links.contains(e.target) || toggle.contains(e.target)) return;
+      links.classList.remove('open');
+      toggle.textContent = '☰';
+    });
   }
 
   var revealEls = document.querySelectorAll('[data-reveal]');

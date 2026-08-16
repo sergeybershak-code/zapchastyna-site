@@ -56,7 +56,10 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
-img { max-width: 100%; display: block; }
+/* height:auto обов'язковий: у <img> проставлені width/height (проти стрибків
+   макета), і без нього браузер узяв би натуральну висоту з атрибута —
+   картинки спотворилися б, коли max-width стискає ширину */
+img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-decoration: none; }
 h1, h2, h3, h4 {
   font-family: var(--font-display);
@@ -157,7 +160,7 @@ section { position: relative; }
   justify-content: space-between;
   height: 55px;
 }
-.nav-logo img { height: 45px; }
+.nav-logo img { height: 45px; width: auto; }
 .nav-links {
   display: flex;
   align-items: center;
@@ -217,7 +220,7 @@ section { position: relative; }
 }
 @media (max-width: 420px) {
   .site-nav .container { padding-inline: 14px; }
-  .nav-logo img { height: 34px; }
+  .nav-logo img { height: 34px; width: auto; }
   .contact-icon { width: 30px; height: 30px; }
   .nav-right { gap: 8px; }
   .nav-toggle { font-size: 22px; }
@@ -268,7 +271,7 @@ section { position: relative; }
   align-items: center;
   padding-top: 120px; /* місце під фіксований .site-nav (55px) + оверлей .slogan-strip (на мобілці — 2 рядки) */
   position: relative;
-  background-image: url("../images/hero/front.jpg");
+  background-image: url("../images/hero/front.webp");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 82% 58%;
@@ -697,7 +700,7 @@ section { position: relative; }
   margin-bottom: 8px;
   display: block;
 }
-.instr-step h3 { font-size: 24px; text-transform: none; margin-bottom: 10px; }
+.instr-step h2 { font-size: 24px; text-transform: none; margin-bottom: 10px; }
 .instr-step p { color: var(--ink-soft); font-size: 15.5px; line-height: 1.65; }
 .instr-step .warn {
   margin-top: 14px;
@@ -898,9 +901,9 @@ section { position: relative; }
   padding-bottom: 36px;
   border-bottom: 1px solid var(--gray-line);
 }
-.footer-brand img { height: 48px; margin-bottom: 14px; }
+.footer-brand img { height: 48px; width: auto; margin-bottom: 14px; }
 .footer-brand p { font-size: 14px; color: var(--gray); max-width: 32ch; }
-.footer-col h4 {
+.footer-col h3 {
   font-family: var(--font-body);
   text-transform: uppercase;
   font-size: 12.5px;
